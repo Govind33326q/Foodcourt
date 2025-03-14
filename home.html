@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Ordering</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Order Your Favorite Food 🍕</h1> <a href="pet.html" class="btn">Back</a>
+        <!-------------------------------------------------Burger----------------------------------------------------------------->
+
+
+        <div class="food-list">
+            <div class="food-item" data-name="Cheese Burger" data-price="150">
+                <img src="burger.png.jpg" alt="Burger">
+                <h3>Cheese Burger</h3>
+                <p>Delicious cheese burger with extra toppings.</p>
+                <p class="price">₹150</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+           
+            <!----------------------------------------------Pizza----------------------------------------------------------------->
+
+
+            <div class="food-item" data-name="Margherita Pizza" data-price="300">
+                <img src="Mpizza.jpg" alt="Pizza">
+                <h3>Margherita Pizza</h3>
+                <p>Classic Italian pizza with fresh ingredients.</p>
+                <p class="price">₹300</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!------------------------------------------------Pasta--------------------------------------------------------------->
+
+        
+            <div class="food-item" data-name="Creamy Pasta" data-price="250">
+                <img src="cpasta.jpg.jpg" alt="Pasta">
+                <h3>Creamy Pasta</h3>
+                <p>Rich and creamy pasta with garlic bread.</p>
+                <p class="price">₹250</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-------------------------------------------------vada Pav----------------------------------------------------------->
+
+
+            <div class="food-item" data-name="Vada Pav" data-price="25">
+                <img src="vada pav.jpg" alt="Pasta">
+                <h3>Vada Pav</h3>
+                <p>Mumbai ki Jaan.<br>
+                  Spicy and Tasty vada Pav.👌😋
+                </p>
+                <p class="price">₹25</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+           <!-----------------------------------------------------jalebi------------------------------------------------------------>
+
+            <div class="food-item" data-name="jalebi" data-price="30">
+                <img src="jalebi.jpg" alt="Jalebi">
+                <h3>Jalebi</h3>
+                <p>Crunchy And Sweet Jalebi.<br>
+                    Kuch Meetha Ho Jae !<br>
+                </p>
+                <p class="price">₹25</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+           
+            <!------------------------------------------------------------------------------------------------------------------->
+        </div>
+        
+        <div class="cart">
+            <h2>🛒 Your Cart</h2>
+            <ul class="cart-items"></ul>
+            <p class="cart-total">Total: ₹0</p>
+            <button class="checkout">Checkout</button>
+           
+        </div>
+        
+        
+        
+    </div>
+
+    <script>
+        const cartItems = document.querySelector(".cart-items");
+        const cartTotal = document.querySelector(".cart-total");
+        const checkoutButton = document.querySelector(".checkout");
+        let total = 0;
+
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", () => {
+                const foodItem = button.parentElement;
+                const name = foodItem.getAttribute("data-name");
+                const price = parseInt(foodItem.getAttribute("data-price"));
+                total += price;
+                
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `${name} - ₹${price} <button class='remove-item'>Remove</button>`;
+                cartItems.appendChild(listItem);
+                
+                cartTotal.textContent = `Total: ₹${total}`;
+                
+                listItem.querySelector(".remove-item").addEventListener("click", () => {
+                    total -= price;
+                    cartTotal.textContent = `Total: ₹${total}`;
+                    listItem.remove();
+                });
+            });
+        });
+
+        
+
+        checkoutButton.addEventListener("click", () => {
+            localStorage.setItem("cartTotal", total);
+            window.location.href = "qr.html";
+        });
+    </script>
+</body>
+</html>
